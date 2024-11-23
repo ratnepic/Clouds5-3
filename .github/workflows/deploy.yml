@@ -1,0 +1,14 @@
+name: Deploy to Server
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server
+        run: |
+          ssh eyeloo@localhost "docker pull your-dockerhub-username/flask-app:latest && docker-compose up -d"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
